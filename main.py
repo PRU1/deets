@@ -4,6 +4,9 @@ import summarizer
 import output_to_file as output
 
 # filepath to slide, to be replaced with a live feed later
+# TODO: defense in depth
+# If using file path, should pre-emptively ensure that there are no path traversal characters:
+# Ensured resolved_path = input_path
 
 # the test file
 # path = '/Users/name/Documents/Screenshots/Screenshot 2023-12-18 at 12.45.38 PM.png'
