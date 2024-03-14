@@ -2,6 +2,7 @@
 import tkinter as tk
 from PIL import ImageTk, Image
 import pyscreenshot
+import pyautogui
 
 x1,y1,x2,y2 = [0,0,0,0]
 class MousePositionTracker(tk.Frame):
@@ -69,7 +70,7 @@ class MousePositionTracker(tk.Frame):
         self.reset()
     
 def screenshot_of_region(self,event):
-    #global x1; global x2; global y1; global y2;
+    global x1; global x2; global y1; global y2;
     """ TESTING FIXING OFFSET
     x1 += 900
     x2 += 900
@@ -83,16 +84,13 @@ def screenshot_of_region(self,event):
         image = pyscreenshot.grab(bbox=(x2,y2,x1,y1))
     else:
         image = pyscreenshot.grab(bbox=(x1,y1,x2,y2))
-    """
-    a1 = int(self.canvas.winfo_x())
-    b1 =int(self.canvas.winfo_y())
-    a2 = a1+400
-    b2 = b1+400
-    print("coordinate values x1,y1,x2,y2: ", a1, b1, a2, b2)
 
-    image=pyscreenshot.grab(bbox=(a1,b1,a2,b2))
-
+    image=pyscreenshot.grab(bbox=(x1,y1,x2,y2))
     image.save("testingScreenshot.png")
+    """
+    print("coordinate values x1,y1,x2,y2: ", x1, y1, x2, y2)
+    image = pyautogui.screenshot('myScreenShot.png',region=(x1,y1,(x2-x1),(y2-y1)))
+
 class SelectionObject:
     """ Widget to display a rectangular area on given canvas defined by two points
         representing its diagonal.
@@ -180,7 +178,7 @@ class Application(tk.Frame):
 
 if __name__ == '__main__':
 
-    WIDTH, HEIGHT = 400, 400
+    WIDTH, HEIGHT = 900, 900
     BACKGROUND = 'grey'
     TITLE = 'Image Cropper'
 
